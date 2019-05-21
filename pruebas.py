@@ -1,23 +1,21 @@
 import pysftp
 import os
+import json
 
 cnopts = pysftp.CnOpts()
 cnopts.hostkeys = None
 
-host = ''
-username = ''
-password = ''
-srv = pysftp.Connection(host=host, username=username, password=password, cnopts=cnopts)
+with open('config.json') as json_config:
+    data = json.load(json_config)
 
-remote_dir = ''
-local_dir = ''
+srv = pysftp.Connection(host=data['host'], username=data['username'], password=data['password'], cnopts=cnopts)
 
-print('Backup to '+ os.path.abspath(local_dir) + '')    # '' = backup_folder
-srv.chdir(remote_dir)
-srv.get_r('.', local_dir + '', preserve_mtime=True)     # '' = backup_folder
+print('Backup to '+ os.path.abspath(data['local_dir']) + data['backup_folder'])
+srv.chdir(data['remote_dir'])
+srv.get_r('.', data['local_dir'] + data['backup_folder'], preserve_mtime=True) 
 print('Done :D')
-print('Uploading to ' + remote_dir)
-srv.put_r(local_dir + '', remote_dir, preserve_mtime=True)  # '' = angular_compiled_folder_inside_dist
+print('Uploading to ' + data['remote_dir'])
+srv.put_r(data['local_dir'] + data['base'], data['remote_dir'], preserve_mtime=True)
 print('Done :D')
 
 srv.close()
