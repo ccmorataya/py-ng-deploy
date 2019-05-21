@@ -5,5 +5,8 @@
     "remote_dir": "/remote/dir/path",
     "local_dir": "./local/dir/path",
     "backup_folder": "/backup/folder/inside/base",
-    "base": "/angular/base/folder"
+    "base": "/angular/base/folder",
+    "upload_py_path": "../relative/path/to/upload.py",
+    "index_path": "./dist/root/index.html"
+
 }
