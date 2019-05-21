@@ -1,11 +1,16 @@
 import os
 import subprocess as sp
+import sys
 
 # TODO-CM: add ascii art
 print('Building...')
 # CM: first build the ng app
 # .run shows the output during the execution
-result = sp.run(['ng', 'build', '--prod'], shell=True)
+ngBuild = ['ng', 'build']
+if sys.argv[1] == 'prod':
+    ngBuild.append('--prod')
+
+result = sp.run(ngBuild, shell=True)
 
 # CM: get the hash
 if result.returncode == 0:
