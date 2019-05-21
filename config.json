@@ -1,0 +1,9 @@
+{
+    "host": "localhost",
+    "username": "user",
+    "password": "pass",
+    "remote_dir": "/remote/dir/path",
+    "local_dir": "./local/dir/path",
+    "backup_folder": "/backup/folder/inside/base",
+    "base": "/angular/base/folder"
+}
