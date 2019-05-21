@@ -12,6 +12,7 @@ srv = pysftp.Connection(host=data['host'], username=data['username'], password=d
 
 print('Backup to '+ os.path.abspath(data['local_dir']) + data['backup_folder'])
 srv.chdir(data['remote_dir'])
+# TODO-CM: validate if the backup_folder exists
 srv.get_r('.', data['local_dir'] + data['backup_folder'], preserve_mtime=True)
 print('Done :D')
 print('Uploading to ' + data['remote_dir'])
