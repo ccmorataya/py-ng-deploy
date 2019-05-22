@@ -2,12 +2,13 @@ import pysftp
 import os
 import json
 
+json_data = {}
+with open('.ngpydeployrc') as json_config:
+    json_data = json.load(json_config)
+
 def upload():
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
-
-    with open('config.json') as json_config:
-        json_data = json.load(json_config)
 
     srv = pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts)
     backup_path = json_data['angular_project_root'] + json_data['local_dir'] + json_data['backup_folder']

@@ -3,8 +3,8 @@ import os
 import sys
 import json
 
-from build import ng_py_build
-from upload import ng_py_upload
+from .bld import ng_py_build
+from .upload import ng_py_upload
 
 def main():
     if len(sys.argv) == 1:

@@ -4,7 +4,7 @@ import sys
 import json
 
 json_data = {}
-with open('config.json') as json_config:
+with open('.ngpydeployrc') as json_config:
     json_data = json.load(json_config)
 
 def build(environment):
@@ -27,7 +27,7 @@ def build(environment):
 def gen_hash(generateHash):
     if generateHash == 'hash':
         print('Adding hash commit...')
-        repo = '.git'
+        repo = f'{json_data["angular_project_root"]}/.git'
         sha = sp.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo).decode('ascii').strip()
         objSlice = slice(0, 7)
         sha = sha[objSlice]
