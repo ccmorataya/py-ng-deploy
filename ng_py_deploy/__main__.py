@@ -3,15 +3,15 @@ import os
 import sys
 import json
 
-from .bld import ng_py_build
-from .upload import ng_py_upload
+from ng_py_deploy import ng_py_build
+from ng_py_deploy import ng_py_upload
 
 def main():
     if len(sys.argv) == 1:
         # TODO-CM: add ascii art
-        print('ng-py-deploy\n')
+        print('ng_py_deploy\n')
         print('Usage:')
-        print('  ng-py-deploy (prod | dev) [hash]')
+        print('  ng_py_deploy (prod | dev) [hash]')
         sys.exit()
 
     if len(sys.argv) > 1:

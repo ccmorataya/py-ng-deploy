@@ -10,7 +10,7 @@ README = (HERE / 'readme.md').read_text()
 # This call to setup() does all the work
 setup(
     name='ng-py-deploy',
-    version='0.0.1',
+    version='0.0.4',
     description='Compile angular project and upload to sftp',
     long_description=README,
     long_description_content_type='text/markdown',
@@ -21,7 +21,12 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',
     ],
-    packages=['upload', 'bld'],
+    packages=['ng_py_deploy'],
+    entry_points={
+        'console_scripts': [
+            'ng-py-deploy=ng_py_deploy.__main__.main'
+        ]
+    },
     include_package_data=True,
     install_requires=['pysftp'],
 )
