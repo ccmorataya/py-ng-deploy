@@ -3,14 +3,24 @@ import subprocess as sp
 import sys
 import json
 
-# TODO-CM: add ascii art
-print('Building...')
+if len(sys.argv) == 1:
+    # TODO-CM: add ascii art
+    print('ng-py-deploy\n')
+    print('Usage:')
+    print('  python ng-py-deploy.py (prod | dev) [hash]')
+    sys.exit()
 # CM: first build the ng app
 # .run shows the output during the execution
 ngBuild = ['ng', 'build']
-if len(sys.argv) > 1 and sys.argv[1] == 'prod':
-    ngBuild.append('--prod')
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'prod':
+        ngBuild.append('--prod')
+    elif sys.argv[1] == 'dev':
+        pass
+    else:
+        sys.exit()
 
+print('Building...')
 with open('config.json') as json_config:
     json_data = json.load(json_config)
 
