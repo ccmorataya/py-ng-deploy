@@ -2,9 +2,8 @@
     "host": "localhost",
     "username": "user",
     "password": "pass",
-    "remote_dir": "/remote/dir/path",
-    "local_dir": "./local/dir/path",
-    "backup_folder": "/backup/folder/inside/base",
-    "base": "/angular/base/folder",
-    "angular_project_root": "/absolute/path/to/angular/project/root"
+    "dist_dir": "/dist-inside-angular-project-root",
+    "backup_dir": "/backup/folder/inside/base",
+    "base": "/compiled-dir-inside-dist",
+    "remote_dir": "/remote/dir/path"
 }
