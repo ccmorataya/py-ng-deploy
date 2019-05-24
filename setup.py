@@ -28,5 +28,5 @@ setup(
         ]
     },
     include_package_data=True,
-    install_requires=['pysftp'],
+    install_requires=['pysftp', 'pyfyglet'],
 )

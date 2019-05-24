@@ -2,13 +2,16 @@ import os
 import sys
 import json
 
+from pyfiglet import Figlet
+from ng_py_deploy import __version__
 from ng_py_deploy import ng_py_build
 from ng_py_deploy import ng_py_upload
 
 def main():
     if len(sys.argv) == 1:
-        # TODO-CM: add ascii art
-        print('ng_py_deploy\n')
+        f = Figlet(font='big')
+        print(f.renderText('ngPyDeploy'))
+        print(f'Version: {__version__}\n')
         print('Usage:')
         print('  ng_py_deploy (prod | dev) [hash]')
         sys.exit()
