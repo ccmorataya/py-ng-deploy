@@ -2,7 +2,7 @@ import pysftp
 import os
 import json
 
-NG_PY_DEPLOY_ROOT = os.getcwd()
+NG_ROOT_DIR = os.getcwd()
 json_data = {}
 with open('.ngpydeployrc') as json_config:
     json_data = json.load(json_config)
@@ -12,8 +12,8 @@ def upload():
     cnopts.hostkeys = None
 
     srv = pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts)
-    backup_path = NG_PY_DEPLOY_ROOT + json_data['dist_dir'] + json_data['backup_dir']
-    base_path = NG_PY_DEPLOY_ROOT + json_data['dist_dir'] + json_data['base']
+    backup_path = NG_ROOT_DIR + json_data['dist_dir'] + json_data['backup_dir']
+    base_path = NG_ROOT_DIR + json_data['dist_dir'] + json_data['base']
 
     print('Backup to '+ backup_path)
     srv.chdir(json_data['remote_dir'])

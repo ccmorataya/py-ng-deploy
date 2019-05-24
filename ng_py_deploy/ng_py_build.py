@@ -3,7 +3,7 @@ import subprocess as sp
 import sys
 import json
 
-NG_PY_DEPLOY_ROOT = os.getcwd()
+NG_ROOT_DIR = os.getcwd()
 json_data = {}
 with open('.ngpydeployrc') as json_config:
     json_data = json.load(json_config)
@@ -27,18 +27,18 @@ def build(environment):
 def gen_hash(generateHash):
     if generateHash == 'hash':
         print('Adding hash commit...')
-        repo = f'{ng_py_deploy_root}/.git'
+        repo = f'{NG_ROOT_DIR}/.git'
         sha = sp.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo).decode('ascii').strip()
         objSlice = slice(0, 7)
         sha = sha[objSlice]
 
         # CM: alter index.html
-        with open(NG_PY_DEPLOY_ROOT + json_data['dist_dir'] + json_data['base'] + '/index.html', 'r') as file:
+        with open(NG_ROOT_DIR + json_data['dist_dir'] + json_data['base'] + '/index.html', 'r') as file:
             data = file.readlines()
 
         # TODO-CM: add branch name
         data[4] = '  <title>:: Commit:' + sha + '</title>\n'    # project title
 
-        with open(NG_PY_DEPLOY_ROOT + json_data['dist_dir'] + json_data['base'] + '/index.html', 'w') as file:
+        with open(NG_ROOT_DIR + json_data['dist_dir'] + json_data['base'] + '/index.html', 'w') as file:
             file.writelines( data )
         print('The hash is ' + sha)
