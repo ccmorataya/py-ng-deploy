@@ -1,6 +1,6 @@
 import pathlib
 from setuptools import setup
-from ng_py_deploy import __version__
+from py_ng_deploy import __version__
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -10,22 +10,22 @@ README = (HERE / 'readme.md').read_text()
 
 # This call to setup() does all the work
 setup(
-    name='ng-py-deploy',
+    name='py-ng-deploy',
     version=__version__,
     description='Compile angular project and upload to sftp',
     long_description=README,
     long_description_content_type='text/markdown',
-    url='https://github.com/ccmorataya/ng-py-deploy',
+    url='https://github.com/ccmorataya/py-ng-deploy',
     author='Cristian Morataya',
     author_email='cris.morataya@gmail.com',
     classifiers=[
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',
     ],
-    packages=['ng_py_deploy'],
+    packages=['py_ng_deploy'],
     entry_points={
         'console_scripts': [
-            'ngPyDeploy=ng_py_deploy.__main__:main'
+            'pyngDeploy=py_ng_deploy.__main__:main'
         ]
     },
     include_package_data=True,

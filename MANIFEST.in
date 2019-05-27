@@ -1,1 +1,1 @@
-include ng_py_deploy/.ngpydeployrc
+include py_ng_deploy/.pyngdeployrc

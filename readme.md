@@ -1,12 +1,33 @@
-# ng-deploy-py
-## Simple repro steps
-* `cd` to the angular project root.
-* Open ipython shell.
-* Run `%run the/path/to/ng-git-build.py` (replacing the path with the real one).
+# py-ng-deploy
+## Install
+```sh
+pip install py-ng-deploy
+```
 
----
+## Usage
+### Info
+```sh
+$ pyngDeploy
+```
 
-## Testing time
-* `ng build --prod`: 02:21.95
-* **sftpy backup and upload**: 00:47.43
-* **total**: 03:09.38
+> **NOTE** `pyngDeploy` needs to be runned inside the angular project
+
+### Initialize project
+```sh
+$ pyngDeploy init
+```
+
+### Build and upload (development)
+```sh
+$ pyngDeploy dev
+```
+
+### Build and upload (production)
+```sh
+$ pyngDeploy prod
+```
+
+### Build with hash in `<title>` and upload (development)
+```sh
+$ pyngDeploy prod hash
+```

@@ -5,7 +5,7 @@ import json
 NG_ROOT_DIR = os.getcwd()
 json_data = {}
 try:
-    with open('.ngpydeployrc') as json_config:
+    with open('.pyngdeployrc') as json_config:
         json_data = json.load(json_config)
 except FileNotFoundError:
     pass
