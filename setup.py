@@ -1,5 +1,6 @@
 import pathlib
 from setuptools import setup
+from ng_py_deploy import __version__
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -10,7 +11,7 @@ README = (HERE / 'readme.md').read_text()
 # This call to setup() does all the work
 setup(
     name='ng-py-deploy',
-    version='0.0.9',
+    version=__version__,
     description='Compile angular project and upload to sftp',
     long_description=README,
     long_description_content_type='text/markdown',
