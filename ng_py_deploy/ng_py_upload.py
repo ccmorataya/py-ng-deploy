@@ -4,8 +4,11 @@ import json
 
 NG_ROOT_DIR = os.getcwd()
 json_data = {}
-with open('.ngpydeployrc') as json_config:
-    json_data = json.load(json_config)
+try:
+    with open('.ngpydeployrc') as json_config:
+        json_data = json.load(json_config)
+except FileNotFoundError:
+    pass
 
 def upload():
     cnopts = pysftp.CnOpts()
