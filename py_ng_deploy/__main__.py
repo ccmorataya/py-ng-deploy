@@ -3,7 +3,6 @@ import sys
 import json
 import shutil
 
-from pyfiglet import Figlet
 from pathlib import Path
 from py_ng_deploy import __version__
 from py_ng_deploy import py_ng_build
@@ -13,8 +12,14 @@ NG_ROOT_DIR = os.getcwd()
 
 def main():
     if len(sys.argv) == 1:
-        f = Figlet(font='big')
-        print(f.renderText('pyngDeploy'))
+        print('                         _____             _')
+        print('                        |  __ \           | |')
+        print(' _ __  _   _ _ __   __ _| |  | | ___ _ __ | | ___  _   _')
+        print('| \'_ \| | | | \'_ \ / _` | |  | |/ _ \ \'_ \| |/ _ \| | | |')
+        print('| |_) | |_| | | | | (_| | |__| |  __/ |_) | | (_) | |_| |')
+        print('| .__/ \__, |_| |_|\__, |_____/ \___| .__/|_|\___/ \__, |')
+        print('| |     __/ |       __/ |           | |             __/ |')
+        print('|_|    |___/       |___/            |_|            |___/')
         print(f'Version: {__version__}\n')
         print('Usage:')
         print('  pyngDeploy (prod | dev) [hash]')

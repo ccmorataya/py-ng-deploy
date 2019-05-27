@@ -29,5 +29,5 @@ setup(
         ]
     },
     include_package_data=True,
-    install_requires=['pysftp', 'pyfiglet'],
+    install_requires=['pysftp'],
 )
