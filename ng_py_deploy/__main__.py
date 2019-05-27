@@ -46,9 +46,10 @@ def initialize(init_keyword):
     if init_keyword == 'init':
         dest_rcfile = f'{NG_ROOT_DIR}/.ngpydeployrc'
         rc_file = Path(dest_rcfile)
-        src_file = f'{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/.ngpydeployrc'
+        src_rcfile = f'{os.path.dirname(os.path.abspath(__file__))}/.ngpydeployrc'
         if not rc_file.is_file():
             shutil.copy(src_rcfile, dest_rcfile)
+            print('Configuration file created')
             print('Please edit the file .ngpydeployrc with the given keys')
         else:
             print('.ngpydeployrc file already exists')
