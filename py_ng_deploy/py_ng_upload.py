@@ -2,7 +2,6 @@ import pysftp
 import os
 import json
 
-NG_ROOT_DIR = os.getcwd()
 json_data = {}
 try:
     with open('.pyngdeployrc') as json_config:
@@ -10,15 +9,15 @@ try:
 except FileNotFoundError:
     pass
 
-def upload():
+def upload(outputPath):
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
 
     srv = pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts)
-    backup_path = NG_ROOT_DIR + json_data['dist_dir'] + json_data['backup_dir']
-    base_path = NG_ROOT_DIR + json_data['dist_dir'] + json_data['base']
+    backup_path = f'./dist{json_data["backup_dir"]}'
+    base_path = f'./{outputPath}'
 
-    print('Backup to '+ backup_path)
+    print('Backup to '+ os.path.abspath(backup_path))
     srv.chdir(json_data['remote_dir'])
     if not os.path.isdir(backup_path):
         print('Backup path doesn\'t exists, creating')

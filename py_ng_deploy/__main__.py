@@ -8,7 +8,7 @@ from py_ng_deploy import __version__
 from py_ng_deploy import py_ng_build
 from py_ng_deploy import py_ng_upload
 
-NG_ROOT_DIR = os.getcwd()
+RCFILE = '.pyngdeployrc'
 
 def main():
     if len(sys.argv) == 1:
@@ -25,15 +25,13 @@ def main():
         print('  pyngDeploy (prod | dev) [hash]')
         sys.exit()
     elif len(sys.argv) > 1:
-        do_init = initialize(sys.argv[1])
-
-        if not do_init:
+        if not initialize(sys.argv[1]):
             result = py_ng_build.build(sys.argv[1])
             if result.returncode == 0:
                 if len(sys.argv) > 2:
-                    py_ng_build.gen_hash(sys.argv[2])
+                    py_ng_build.gen_hash(sys.argv[2], json_find())
 
-                py_ng_upload.upload()
+                py_ng_upload.upload(json_find())
                 # spCallParams = []
                 # if os.name == 'nt':
                 #     spCallParams.append('bash.exe')
@@ -49,24 +47,41 @@ def main():
 
 def initialize(init_keyword):
     if init_keyword == 'init':
-        dest_rcfile = f'{NG_ROOT_DIR}/.pyngdeployrc'
-        rc_file = Path(dest_rcfile)
-        src_rcfile = f'{os.path.dirname(os.path.abspath(__file__))}/.pyngdeployrc'
+        rc_file = Path(RCFILE)
+        src_rcfile = f'{os.path.dirname(os.path.abspath(__file__))}/{RCFILE}'
         if not rc_file.is_file():
             shutil.copy(src_rcfile, dest_rcfile)
             print('Configuration file created')
-            print('Please edit the file .pyngdeployrc with the given keys')
+            print(f'Please edit the file {RCFILE} with the given keys')
         else:
-            print('.pyngdeployrc file already exists')
+            print(f'{RCFILE} file already exists')
             print('Verify it and their config keys')
-        # CM: do init stuff
-        # * IF not exist rc file THEN
-        #     create file inside project root based on config.json AND
-        #     warn to user to edit the keys
-
         return True
     else:
+        return check_rcfile()
+
+def check_rcfile():
+    if Path(RCFILE).is_file():
         return False
+    else:
+        sys.exit(f'{RCFILE} not found, please init project')
+
+def json_find():
+    json_file = {}
+    try:
+        with open('angular.json') as json_config:
+            json_file = json.load(json_config)
+    except FileNotFoundError:
+        sys.exit('angular.json file not found, verify that you are in an angular project folder')
+    return iter_finder(json_file, 'outputPath')
+
+def iter_finder(input_dict, key):
+    if key in input_dict: return input_dict[key]
+    for value in input_dict.values():
+        if isinstance(value, dict):
+            res = iter_finder(value, key)
+            if res is not None: return res
+    return None
 
 if __name__ == '__main__':
     main()
