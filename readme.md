@@ -24,9 +24,6 @@ $ pyngDeploy init
     "host": "localhost",
     "username": "user",
     "password": "pass",
-    "dist_dir": "/dist-inside-angular-project-root",
-    "backup_dir": "/backup/folder/inside/base",
-    "base": "/compiled-dir-inside-dist",
     "remote_dir": "/remote/dir/path"
 }
 ```

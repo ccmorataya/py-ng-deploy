@@ -50,7 +50,7 @@ def initialize(init_keyword):
         rc_file = Path(RCFILE)
         src_rcfile = f'{os.path.dirname(os.path.abspath(__file__))}/{RCFILE}'
         if not rc_file.is_file():
-            shutil.copy(src_rcfile, dest_rcfile)
+            shutil.copy(src_rcfile, RCFILE)
             print('Configuration file created')
             print(f'Please edit the file {RCFILE} with the given keys')
         else:
