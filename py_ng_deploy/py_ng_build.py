@@ -12,7 +12,7 @@ except FileNotFoundError:
     pass
 
 def build(environment):
-    ngBuild = ['ng', 'build']
+    ngBuild = ['ng', 'build', '--sourceMap=false']
     if environment == 'prod':
         ngBuild.append('--prod')
     elif environment == 'dev':
