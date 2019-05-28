@@ -31,7 +31,7 @@ def main():
                 if len(sys.argv) > 2:
                     py_ng_build.gen_hash(sys.argv[2], json_find())
 
-                py_ng_upload.upload(json_find())
+                py_ng_upload.upload(json_find(), False)
                 # spCallParams = []
                 # if os.name == 'nt':
                 #     spCallParams.append('bash.exe')
@@ -57,6 +57,9 @@ def initialize(init_keyword):
             print(f'{RCFILE} file already exists')
             print('Verify it and their config keys')
         return True
+    elif init_keyword == 'restore':
+        print(f'RESTORING LAST BACKUP!')
+        py_ng_upload.upload(json_find(), True)
     else:
         return check_rcfile()
 
