@@ -14,13 +14,12 @@ def upload(outputPath):
     cnopts.hostkeys = None
 
     srv = pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts)
-    backup_path = f'./dist{json_data["backup_dir"]}'
+    backup_path = f'./dist/bkp'
     base_path = f'./{outputPath}'
 
     print('Backup to '+ os.path.abspath(backup_path))
     srv.chdir(json_data['remote_dir'])
     if not os.path.isdir(backup_path):
-        print('Backup path doesn\'t exists, creating')
         os.mkdir(backup_path)
     srv.get_r('.', backup_path, preserve_mtime=True)
     print('Done :D')
