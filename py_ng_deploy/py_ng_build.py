@@ -21,7 +21,7 @@ def build(environment):
         sys.exit()
 
     print('Building...')
-    result = sp.run(ngBuild)
+    result = sp.run(ngBuild, shell=os.name == 'nt')
     return result
 
 def gen_hash(generateHash, outputPath):
