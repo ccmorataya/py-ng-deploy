@@ -16,7 +16,7 @@ def upload(output_path, restore_deployment, is_posix):
     cnopts.hostkeys = None
 
     srv = pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts)
-    backup_path = f'./dist/bkp'
+    backup_path = f'./dist/bkp' if is_posix else r'.\dist\bkp'
     base_path = f'./{output_path}'
 
     if not restore_deployment:
