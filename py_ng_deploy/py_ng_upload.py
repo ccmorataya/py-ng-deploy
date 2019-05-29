@@ -10,13 +10,14 @@ try:
 except FileNotFoundError:
     pass
 
-def upload(outputPath, restore_deployment):
+def upload(output_path, restore_deployment, is_posix):
+    print(f'CM::isPosix: {is_posix}')
     cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
 
     srv = pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts)
     backup_path = f'./dist/bkp'
-    base_path = f'./{outputPath}'
+    base_path = f'./{output_path}'
 
     if not restore_deployment:
         print('Backup to '+ os.path.abspath(backup_path))
