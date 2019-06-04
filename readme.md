@@ -1,8 +1,22 @@
 # py-ng-deploy
+
+## Requirements
+* node
+* angular-cli
+* python3
+
 ## Install
+**_Recomended_**
 ```
 pip install py-ng-deploy
 ```
+**_Alternative_**
+* Clone this repo:  
+`$ git clone https://github.com/ccmorataya/py-ng-deploy.git`
+* Change dir to _py-ng-deploy:_  
+`$ cd py-ng-deploy`
+* Install with _setup.py:_  
+`$ python setup.py install`
 
 ## Usage
 ### Info
@@ -17,7 +31,7 @@ $ pyngDeploy
 $ pyngDeploy init
 ```
 
->_After `init` is required to edit the .pyngdeployrc file that has the following structure:_
+>_After `init` is required to edit the .pyngdeployrc file with the following structure:_
 
 ```json
 {
@@ -42,5 +56,10 @@ $ pyngDeploy prod
 
 ### Build with hash in `<title>` and upload (development)
 ```
-$ pyngDeploy prod hash
+$ pyngDeploy dev hash
+```
+
+### Restore last backup
+```
+$ pyngDeploy restore
 ```
