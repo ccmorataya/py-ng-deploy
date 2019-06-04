@@ -22,7 +22,7 @@ def main():
         print('|_|    |___/       |___/            |_|            |___/')
         print(f'Version: {__version__}\n')
         print('Usage:')
-        print('  pyngDeploy (prod | dev) [hash]')
+        print('  pyngDeploy (prod | dev) [--hash]')
         sys.exit()
     elif len(sys.argv) > 1:
         if not initialize(sys.argv[1]):

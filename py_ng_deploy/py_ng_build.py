@@ -25,7 +25,7 @@ def build(environment):
     return result
 
 def gen_hash(generateHash, outputPath):
-    if generateHash == 'hash':
+    if generateHash == '--hash':
         print('Adding hash commit...')
         repo = f'./.git'
         sha = sp.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo).decode('ascii').strip()
