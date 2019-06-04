@@ -65,5 +65,5 @@ $ pyngDeploy restore
 ```
 
 ## TODO
-- [ ] Avoid leaving `None` the `cnopts.hostKeys`
+- [X] Avoid leaving `None` the `cnopts.hostKeys`
 - [ ] Improve upload integration from Windows to Linux _(Actually not working)_
