@@ -20,13 +20,13 @@ def build(environment):
     else:
         sys.exit()
 
-    print('Building...')
+    print('[pyngDeploy]:: Building...')
     result = sp.run(ngBuild, shell=os.name == 'nt')
     return result
 
 def gen_hash(generateHash, outputPath):
     if generateHash == '--hash':
-        print('Adding hash commit...')
+        print('[pyngDeploy]:: Adding hash commit...')
         repo = f'./.git'
         sha = sp.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo).decode('ascii').strip()
         objSlice = slice(0, 7)
@@ -41,7 +41,7 @@ def gen_hash(generateHash, outputPath):
 
         with open(f'./{outputPath}/index.html', 'w') as file:
             file.writelines( data )
-        print('The hash is ' + sha)
+        print('[pyngDeploy]:: The hash is ' + sha)
 
 def replace_tag(data, matching_word, input_text):
     for tag in data:
