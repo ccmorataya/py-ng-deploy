@@ -11,6 +11,7 @@ try:
 except FileNotFoundError:
     pass
 
+
 def build(environment):
     ngBuild = ['ng', 'build', '--sourceMap=false']
     if environment == 'prod':
@@ -24,11 +25,13 @@ def build(environment):
     result = sp.run(ngBuild, shell=os.name == 'nt')
     return result
 
+
 def gen_hash(generateHash, outputPath):
     if generateHash == '--hash':
         print('[pyngDeploy]:: Adding hash commit...')
         repo = f'./.git'
-        sha = sp.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo).decode('ascii').strip()
+        sha = sp.check_output(['git', 'rev-parse', 'HEAD'],
+                              cwd=repo).decode('ascii').strip()
         objSlice = slice(0, 7)
         sha = sha[objSlice]
 
@@ -40,13 +43,16 @@ def gen_hash(generateHash, outputPath):
         replace_tag(data, 'title', sha)
 
         with open(f'./{outputPath}/index.html', 'w') as file:
-            file.writelines( data )
+            file.writelines(data)
         print('[pyngDeploy]:: The hash is ' + sha)
+
 
 def replace_tag(data, matching_word, input_text):
     for tag in data:
         if matching_word in tag:
-            splitted_tag = re.split(f'.+<{matching_word}>|<\/{matching_word}>[\r\n]', tag)
+            splitted_tag = re.split(
+                f'.+<{matching_word}>|</{matching_word}>[\r\n]', tag)
             title_text = ''.join(list(filter(None, splitted_tag)))
-            data[data.index(tag)] = f'  <{matching_word}>{title_text} :: Commit:{input_text}</{matching_word}>\n'
+            data[data.index(tag)] = f"""  <{matching_word}>{title_text}
+            :: Commit:{input_text}</{matching_word}>\n"""
             return

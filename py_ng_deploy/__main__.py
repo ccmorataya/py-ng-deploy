@@ -10,14 +10,17 @@ from py_ng_deploy import py_ng_upload
 
 RCFILE = '.pyngdeployrc'
 
+
 def main():
     if len(sys.argv) == 1:
         print('                         _____             _')
-        print('                        |  __ \           | |')
+        print('                        |  __ \\           | |')
         print(' _ __  _   _ _ __   __ _| |  | | ___ _ __ | | ___  _   _')
-        print('| \'_ \| | | | \'_ \ / _` | |  | |/ _ \ \'_ \| |/ _ \| | | |')
+        print(
+            '| \'_ \\| | | | \'_ \\ / _` | |  | |/ _ \\ \'_ \\| |/ _ \\| | | |'
+              )
         print('| |_) | |_| | | | | (_| | |__| |  __/ |_) | | (_) | |_| |')
-        print('| .__/ \__, |_| |_|\__, |_____/ \___| .__/|_|\___/ \__, |')
+        print('| .__/ \\__, |_| |_|\\__, |_____/ \\___| .__/|_|\\___/ \\__, |')
         print('| |     __/ |       __/ |           | |             __/ |')
         print('|_|    |___/       |___/            |_|            |___/')
         print(f'Version: {__version__}\n')
@@ -45,6 +48,7 @@ def main():
                 # else:
                 #     print('Something fails :O')
 
+
 def initialize(init_keyword):
     if init_keyword == 'init':
         rc_file = Path(RCFILE)
@@ -63,11 +67,13 @@ def initialize(init_keyword):
     else:
         return check_rcfile()
 
+
 def check_rcfile():
     if Path(RCFILE).is_file():
         return False
     else:
         sys.exit(f'{RCFILE} not found, please init project')
+
 
 def json_find():
     json_file = {}
@@ -75,16 +81,21 @@ def json_find():
         with open('angular.json') as json_config:
             json_file = json.load(json_config)
     except FileNotFoundError:
-        sys.exit('angular.json file not found, verify that you are in an angular project folder')
+        sys.exit("""angular.json file not found,
+        verify that you are in an angular project folder""")
     return iter_finder(json_file, 'outputPath')
 
+
 def iter_finder(input_dict, key):
-    if key in input_dict: return input_dict[key]
+    if key in input_dict:
+        return input_dict[key]
     for value in input_dict.values():
         if isinstance(value, dict):
             res = iter_finder(value, key)
-            if res is not None: return res
+            if res is not None:
+                return res
     return None
+
 
 if __name__ == '__main__':
     main()

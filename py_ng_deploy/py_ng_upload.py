@@ -11,21 +11,32 @@ try:
 except FileNotFoundError:
     pass
 
+
 def host_key_check():
     cnopts = pysftp.CnOpts()
     hostkeys = None
 
-    if cnopts.hostkeys.lookup(json_data['host']) == None:
+    if cnopts.hostkeys.lookup(json_data['host']) is None:
         print('[pyngDeploy]:: New host - accepting any host key')
         hostkeys = cnopts.hostkeys
         cnopts.hostkeys = None
-        with pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts) as sftp:
-            if hostkeys != None:
-                print('[pyngDeploy]:: Connected to new host, caching its hostkey')
-                hostkeys.add(json_data['host'], sftp.remote_server_key.get_name(), sftp.remote_server_key)
+        with pysftp.Connection(host=json_data['host'],
+                               username=json_data['username'],
+                               password=json_data['password'],
+                               cnopts=cnopts) as sftp:
+            if hostkeys is not None:
+                print(
+                    '[pyngDeploy]:: Connected to new host, caching its hostkey'
+                    )
+                hostkeys.add(json_data['host'],
+                             sftp.remote_server_key.get_name(),
+                             sftp.remote_server_key)
                 hostkeys.save(pysftp.helpers.known_hosts())
 
-    return pysftp.Connection(host=json_data['host'], username=json_data['username'], password=json_data['password'], cnopts=cnopts)
+    return pysftp.Connection(host=json_data['host'],
+                             username=json_data['username'],
+                             password=json_data['password'],
+                             cnopts=cnopts)
 
 
 def upload(output_path, restore_deployment, is_posix):
@@ -34,7 +45,7 @@ def upload(output_path, restore_deployment, is_posix):
     base_path = f'./{output_path}' if is_posix else f'.\\{output_path}'
 
     if not restore_deployment:
-        print('[pyngDeploy]:: Backup to '+ os.path.abspath(backup_path))
+        print('[pyngDeploy]:: Backup to ' + os.path.abspath(backup_path))
         srv.chdir(json_data['remote_dir'])
         if not os.path.isdir(backup_path):
             os.mkdir(backup_path)
@@ -49,14 +60,18 @@ def upload(output_path, restore_deployment, is_posix):
         if not os.path.isdir(backup_path):
             sys.exit(f'There is no backup at {os.path.abspath(backup_path)}')
         else:
-            print(f'[pyngDeploy]:: Restoring backup from: {os.path.abspath(backup_path)}')
+            print(f"""[pyngDeploy]:: Restoring backup from:
+            {os.path.abspath(backup_path)}""")
             print(f'[pyngDeploy]:: To: {json_data["remote_dir"]}')
             if is_posix:
-                srv.put_r(backup_path, json_data['remote_dir'], preserve_mtime=True)
+                srv.put_r(backup_path,
+                          json_data['remote_dir'],
+                          preserve_mtime=True)
             else:
                 portable_put_r(backup_path, json_data['remote_dir'])
     print('[pyngDeploy]:: Done :D')
     srv.close()
+
 
 def portable_put_r(ldir, rdir):
     for file in os.listdir(ldir):
