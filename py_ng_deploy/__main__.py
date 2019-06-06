@@ -83,8 +83,8 @@ def json_find():
         with open('angular.json') as json_config:
             json_file = json.load(json_config)
     except FileNotFoundError:
-        sys.exit("""angular.json file not found,
-        verify that you are in an angular project folder""")
+        sys.exit('angular.json file not found,'
+                 ' verify that you are in an angular project folder')
     return iter_finder(json_file, 'outputPath')
 
 
