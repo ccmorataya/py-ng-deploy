@@ -20,6 +20,7 @@ pip install -i https://test.pypi.org/simple/ py-ng-deploy
 
 ## Usage
 ### Info
+Shows version, simple usage and notify if the actual folder doesn't has an rc file.
 ```
 $ pyngDeploy
 ```
@@ -61,12 +62,12 @@ $ pyngDeploy prod
 
 ### Build with hash in `<title>` and upload (development)
 ```
-$ pyngDeploy dev hash
+$ pyngDeploy dev --hash
 ```
 
 ### Restore last backup
 ```
-$ pyngDeploy restore
+$ pyngDeploy dev --restore
 ```
 
 ## TODO

@@ -28,7 +28,7 @@ def main():
         print(f'{Fore.BLUE}Usage:')
         print(f'{Fore.BLUE}  pyngDeploy (init | prod | dev) [--hash | --restore]', Style.RESET_ALL)
         if not Path('.pyngdeployrc').is_file():
-            print(f'\n{Fore.RED}[!] The actual dir seems not to be an angular project'
+            print(f'\n{Fore.RED}[!] The actual folder seems not to be an angular project'
                   ' or uninitialized pyngDeploy project, check before try to'
                   ' upload/restore', Style.RESET_ALL)
         sys.exit()
