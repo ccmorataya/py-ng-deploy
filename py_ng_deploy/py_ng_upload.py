@@ -49,7 +49,7 @@ def upload(environment, output_path, restore_deployment, is_posix):
             os.mkdir(backup_path)
         srv.get_r('.', backup_path, preserve_mtime=True)
         print(f'{Fore.GREEN}[pyngDeploy]:: Done :D', Style.RESET_ALL)
-        print(f'{Fore.CYAN}[pyngDeploy]:: Uploading to config[environment]["RemoteDir"]', Style.RESET_ALL)
+        print(f'{Fore.CYAN}[pyngDeploy]:: Uploading to {config[environment]["RemoteDir"]}', Style.RESET_ALL)
         if is_posix:
             srv.put_r(base_path, config[environment]['RemoteDir'], preserve_mtime=True)
         else:
