@@ -1,6 +1,11 @@
-{
-    "host": "localhost",
-    "username": "user",
-    "password": "pass",
-    "remote_dir": "/remote/dir/path"
-}
+[dev]
+Host = localhost
+Username = user
+Password = pass
+RemoteDir = /remote/dir/path
+
+[prod]
+Host = localhost
+Username = user
+Password = pass
+RemoteDir = /remote/dir/path

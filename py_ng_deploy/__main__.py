@@ -25,28 +25,33 @@ def main():
         print('|_|    |___/       |___/            |_|            |___/')
         print(f'Version: {__version__}\n')
         print('Usage:')
-        print('  pyngDeploy (prod | dev) [--hash]')
+        print('  pyngDeploy (init | prod | dev) [--hash | --restore]')
         sys.exit()
     elif len(sys.argv) > 1:
         if not initialize(sys.argv[1]):
-            result = py_ng_build.build(sys.argv[1])
-            if result.returncode == 0:
-                if len(sys.argv) > 2:
+            if len(sys.argv) == 2 or (len(sys.argv) > 2 and not restoring(sys.argv[1], sys.argv[2], True)):
+                result = py_ng_build.build(sys.argv[1])
+                if result.returncode == 0 and len(sys.argv) > 2:
                     py_ng_build.gen_hash(sys.argv[2], json_find())
+                py_ng_upload.upload(sys.argv[1], json_find(), False, os.name == 'posix')
+            else:
+                if restoring(sys.argv[1], sys.argv[2], False):
+                    return
+                else:
+                    print('[pyngDeploy]:: Nothing to do')
+                    sys.exit()
+                    # spCallParams = []
+                    # if os.name == 'nt':
+                    #     spCallParams.append('bash.exe')
+                    #     spCallParams.append('-c')
+                    # spCallParams.append('python')
+                    # spCallParams.append('upload.py')
 
-                py_ng_upload.upload(json_find(), False, os.name == 'posix')
-                # spCallParams = []
-                # if os.name == 'nt':
-                #     spCallParams.append('bash.exe')
-                #     spCallParams.append('-c')
-                # spCallParams.append('python')
-                # spCallParams.append('upload.py')
-
-                # result = sp.call(spCallParams, stderr=sp.DEVNULL)
-                # if result == 0:
-                #     print('Process complete :D')
-                # else:
-                #     print('Something fails :O')
+                    # result = sp.call(spCallParams, stderr=sp.DEVNULL)
+                    # if result == 0:
+                    #     print('Process complete :D')
+                    # else:
+                    #     print('Something fails :O')
 
 
 def initialize(init_keyword):
@@ -61,9 +66,6 @@ def initialize(init_keyword):
             print(f'{RCFILE} file already exists')
             print('Verify it and their config keys')
         return True
-    elif init_keyword == 'restore':
-        print(f'RESTORING LAST BACKUP!')
-        py_ng_upload.upload(json_find(), True, os.name == 'posix')
     else:
         return check_rcfile()
 
@@ -95,6 +97,16 @@ def iter_finder(input_dict, key):
             if res is not None:
                 return res
     return None
+
+
+def restoring(environment, restore_flag, validation):
+    if environment != 'init' and restore_flag == '--restore':
+        if not validation:
+            print(f'RESTORING LAST BACKUP!')
+            py_ng_upload.upload(environment, json_find(), True, os.name == 'posix')
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':

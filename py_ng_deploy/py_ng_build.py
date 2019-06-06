@@ -1,15 +1,11 @@
 import os
 import subprocess as sp
 import sys
-import json
 import re
+import configparser
 
-json_data = {}
-try:
-    with open('.pyngdeployrc') as json_config:
-        json_data = json.load(json_config)
-except FileNotFoundError:
-    pass
+config = configparser.ConfigParser()
+config.read('.pyngdeployrc')
 
 
 def build(environment):
