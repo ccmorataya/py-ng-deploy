@@ -56,7 +56,7 @@ def upload(environment, output_path, restore_deployment, is_posix):
             portable_put_r(base_path, config[environment]['RemoteDir'])
     else:
         if not os.path.isdir(backup_path):
-            sys.exit(f'{Fore.YELLOW}There is no backup at {os.path.abspath(backup_path)}', Style.RESET_ALL)
+            sys.exit(f'{Fore.YELLOW}[pyngDeploy]:: [!] There is no backup at {os.path.abspath(backup_path)}{Style.RESET_ALL}')
         else:
             print(f'{Fore.CYAN}[pyngDeploy]:: Restoring backup from: '
                   f'{Fore.CYAN}{os.path.abspath(backup_path)}', Style.RESET_ALL)

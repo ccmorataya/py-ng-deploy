@@ -79,7 +79,7 @@ def check_rcfile():
     if Path(RCFILE).is_file():
         return False
     else:
-        sys.exit(f'{Fore.RED}{RCFILE} not found, please init project', Style.RESET_ALL)
+        sys.exit(f'{Fore.RED}[pyngDeploy]:: [!] {RCFILE} not found, please init project {Style.RESET_ALL}')
 
 
 def json_find():
@@ -88,8 +88,8 @@ def json_find():
         with open('angular.json') as json_config:
             json_file = json.load(json_config)
     except FileNotFoundError:
-        sys.exit(f'{Fore.RED}angular.json file not found,'
-                 f'{Fore.RED} verify that you are in an angular project folder', Style.RESET_ALL)
+        sys.exit(f'{Fore.RED}[pyngDeploy]:: [!] angular.json file not found,'
+                 f'{Fore.RED} verify that you are in an angular project folder {Style.RESET_ALL}')
     return iter_finder(json_file, 'outputPath')
 
 
@@ -107,7 +107,7 @@ def iter_finder(input_dict, key):
 def restoring(environment, restore_flag, validation):
     if environment != 'init' and restore_flag == '--restore':
         if not validation:
-            print(f'{Fore.CYAN}[pyngDeploy]:: RESTORING LAST BACKUP!', Style.RESET_ALL)
+            print(f'{Fore.YELLOW}[pyngDeploy]:: [!] Restoring Last Backup!', Style.RESET_ALL)
             py_ng_upload.upload(environment, json_find(), True, os.name == 'posix')
         return True
     else:
