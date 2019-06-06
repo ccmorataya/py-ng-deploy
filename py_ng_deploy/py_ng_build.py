@@ -4,7 +4,7 @@ import sys
 import re
 import configparser
 
-from colorama import Fore
+from colorama import Fore, Style
 
 config = configparser.ConfigParser()
 config.read('.pyngdeployrc')
@@ -19,14 +19,14 @@ def build(environment):
     else:
         sys.exit()
 
-    print(f'{Fore.CYAN}[pyngDeploy]:: Building...')
+    print(f'{Fore.CYAN}[pyngDeploy]:: Building...', Style.RESET_ALL)
     result = sp.run(ngBuild, shell=os.name == 'nt')
     return result
 
 
 def gen_hash(generateHash, outputPath):
     if generateHash == '--hash':
-        print(f'{Fore.CYAN}[pyngDeploy]:: Adding hash commit...')
+        print(f'{Fore.CYAN}[pyngDeploy]:: Adding hash commit...', Style.RESET_ALL)
         repo = f'./.git'
         sha = sp.check_output(['git', 'rev-parse', 'HEAD'],
                               cwd=repo).decode('ascii').strip()
@@ -42,7 +42,7 @@ def gen_hash(generateHash, outputPath):
 
         with open(f'./{outputPath}/index.html', 'w') as file:
             file.writelines(data)
-        print(f'{Fore.CYAN}[pyngDeploy]:: The hash is {sha}')
+        print(f'{Fore.CYAN}[pyngDeploy]:: The hash is {sha}', Style.RESET_ALL)
 
 
 def replace_tag(data, matching_word, input_text):

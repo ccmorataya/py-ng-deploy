@@ -3,7 +3,7 @@ import sys
 import json
 import shutil
 
-from colorama import Fore
+from colorama import Fore, Style
 from pathlib import Path
 from py_ng_deploy import __version__
 from py_ng_deploy import py_ng_build
@@ -26,7 +26,7 @@ def main():
         print(f'{Fore.BLUE}|_|    |___/       |___/            |_|            |___/')
         print(f'{Fore.BLUE}Version: {__version__}\n')
         print(f'{Fore.BLUE}Usage:')
-        print(f'{Fore.BLUE}  pyngDeploy (init | prod | dev) [--hash | --restore]')
+        print(f'{Fore.BLUE}  pyngDeploy (init | prod | dev) [--hash | --restore]', Style.RESET_ALL)
         sys.exit()
     elif len(sys.argv) > 1:
         if not initialize(sys.argv[1]):
@@ -39,7 +39,7 @@ def main():
                 if restoring(sys.argv[1], sys.argv[2], False):
                     return
                 else:
-                    print(f'{Fore.CYAN}[pyngDeploy]:: Nothing to do')
+                    print(f'{Fore.CYAN}[pyngDeploy]:: Nothing to do', Style.RESET_ALL)
                     sys.exit()
                     # spCallParams = []
                     # if os.name == 'nt':
@@ -62,10 +62,10 @@ def initialize(init_keyword):
         if not rc_file.is_file():
             shutil.copy(src_rcfile, RCFILE)
             print(f'{Fore.CYAN}[pyngDeploy]:: Configuration file created')
-            print(f'{Fore.CYAN}[pyngDeploy]:: Please edit the file {RCFILE} with the given keys')
+            print(f'{Fore.CYAN}[pyngDeploy]:: Please edit the file {RCFILE} with the given keys', Style.RESET_ALL)
         else:
             print(f'{Fore.YELLOW}[pyngDeploy]:: {RCFILE} file already exists')
-            print(f'{Fore.YELLOW}[pyngDeploy]:: Verify it and their config keys')
+            print(f'{Fore.YELLOW}[pyngDeploy]:: Verify it and their config keys', Style.RESET_ALL)
         return True
     else:
         return check_rcfile()
@@ -75,7 +75,7 @@ def check_rcfile():
     if Path(RCFILE).is_file():
         return False
     else:
-        sys.exit(f'{Fore.RED}{RCFILE} not found, please init project')
+        sys.exit(f'{Fore.RED}{RCFILE} not found, please init project', Style.RESET_ALL)
 
 
 def json_find():
@@ -85,7 +85,7 @@ def json_find():
             json_file = json.load(json_config)
     except FileNotFoundError:
         sys.exit(f'{Fore.RED}angular.json file not found,'
-                 f'{Fore.RED} verify that you are in an angular project folder')
+                 f'{Fore.RED} verify that you are in an angular project folder', Style.RESET_ALL)
     return iter_finder(json_file, 'outputPath')
 
 
@@ -103,7 +103,7 @@ def iter_finder(input_dict, key):
 def restoring(environment, restore_flag, validation):
     if environment != 'init' and restore_flag == '--restore':
         if not validation:
-            print(f'{Fore.CYAN}[pyngDeploy]:: RESTORING LAST BACKUP!')
+            print(f'{Fore.CYAN}[pyngDeploy]:: RESTORING LAST BACKUP!', Style.RESET_ALL)
             py_ng_upload.upload(environment, json_find(), True, os.name == 'posix')
         return True
     else:
