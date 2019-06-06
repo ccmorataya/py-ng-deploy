@@ -33,13 +33,18 @@ $ pyngDeploy init
 
 >_After `init` is required to edit the .pyngdeployrc file with the following structure:_
 
-```json
-{
-    "host": "localhost",
-    "username": "user",
-    "password": "pass",
-    "remote_dir": "/remote/dir/path"
-}
+```ini
+[dev]
+Host = localhost
+Username = user
+Password = pass
+RemoteDir = /remote/dir/path
+
+[prod]
+Host = localhost
+Username = user
+Password = pass
+RemoteDir = /remote/dir/path
 ```
 
 > **Remember to exclude the `.pyngdeployrc` file from git**
