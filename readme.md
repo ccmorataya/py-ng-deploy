@@ -67,5 +67,6 @@ $ pyngDeploy restore
 ## TODO
 - [X] Avoid leaving `None` the `cnopts.hostKeys`
 - [X] Change rcfile to configuration file (.ini)
+- [ ] Add colors to `pyngDeploy` messages
 - [ ] Improve upload integration from Windows to Linux _(Actually not working)_
 - [ ] Add check for .pyngdeployrc when `pyngDeploy` is lauched and send warning
