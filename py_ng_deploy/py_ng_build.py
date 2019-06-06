@@ -42,7 +42,7 @@ def gen_hash(generateHash, outputPath):
 
         with open(f'./{outputPath}/index.html', 'w') as file:
             file.writelines(data)
-        print(f'{Fore.CYAN}[pyngDeploy]:: The hash is ' + sha)
+        print(f'{Fore.CYAN}[pyngDeploy]:: The hash is {sha}')
 
 
 def replace_tag(data, matching_word, input_text):

@@ -43,13 +43,13 @@ def upload(environment, output_path, restore_deployment, is_posix):
     base_path = f'./{output_path}' if is_posix else f'.\\{output_path}'
 
     if not restore_deployment:
-        print(f'{Fore.CYAN}[pyngDeploy]:: Backup to ' + os.path.abspath(backup_path))
+        print(f'{Fore.CYAN}[pyngDeploy]:: Backup to {os.path.abspath(backup_path)}')
         srv.chdir(config[environment]['RemoteDir'])
         if not os.path.isdir(backup_path):
             os.mkdir(backup_path)
         srv.get_r('.', backup_path, preserve_mtime=True)
         print(f'{Fore.GREEN}[pyngDeploy]:: Done :D')
-        print(f'{Fore.CYAN}[pyngDeploy]:: Uploading to ' + config[environment]['RemoteDir'])
+        print(f'{Fore.CYAN}[pyngDeploy]:: Uploading to config[environment]["RemoteDir"]')
         if is_posix:
             srv.put_r(base_path, config[environment]['RemoteDir'], preserve_mtime=True)
         else:
@@ -73,8 +73,8 @@ def upload(environment, output_path, restore_deployment, is_posix):
 
 def portable_put_r(ldir, rdir):
     for file in os.listdir(ldir):
-        newFile = ldir + '\\' + file
-        newR = rdir + '/' + file
+        newFile = f'{ldir}\\{file}'
+        newR = f'{rdid}/file'
         if (os.path.isdir(newFile)):
             srv.mkdir(newR)
             portable_put_r(newFile, newR)
