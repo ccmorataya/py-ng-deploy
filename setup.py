@@ -29,5 +29,5 @@ setup(
         ]
     },
     include_package_data=True,
-    install_requires=['pysftp>=0.2.9'],
+    install_requires=['pysftp>=0.2.9', 'colorama'],
 )
