@@ -26,7 +26,8 @@ def build(environment):
 
 def gen_hash(generateHash, outputPath):
     if generateHash == '--hash':
-        print(f'{Fore.CYAN}[pyngDeploy]:: Adding hash commit...', Style.RESET_ALL)
+        print(f'{Fore.CYAN}[pyngDeploy]:: Adding hash commit...',
+              Style.RESET_ALL)
         repo = f'./.git'
         sha = sp.check_output(['git', 'rev-parse', 'HEAD'],
                               cwd=repo).decode('ascii').strip()
@@ -51,6 +52,7 @@ def replace_tag(data, matching_word, input_text):
             splitted_tag = re.split(
                 f'.+<{matching_word}>|</{matching_word}>[\r\n]', tag)
             title_text = ''.join(list(filter(None, splitted_tag)))
-            data[data.index(tag)] = (f'  <{matching_word}>{title_text} '
-                                     f':: Commit:{input_text}</{matching_word}>\n')
+            data[data.index(tag)] = (
+                f'  <{matching_word}>{title_text} '
+                f':: Commit:{input_text}</{matching_word}>\n')
             return
