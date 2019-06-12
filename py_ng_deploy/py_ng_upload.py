@@ -81,23 +81,21 @@ def upload(environment, output_path, restore_deployment, is_posix):
 
 
 def portable_put_r(srv, ldir, rdir):
-    # for file in os.listdir(ldir):
-    #     newFile = f'{ldir}\\{file}'
-    #     newR = f'{rdir}/file'
-    #     if (os.path.isdir(newFile)):
-    #         srv.mkdir(newR)
-    #         portable_put_r(newFile, newR)
-    #     else:
-    #         srv.put(newFile, newR)
     os.chdir(os.path.split(ldir)[0])
     parent = os.path.split(ldir)[1]
     for walker in os.walk(parent):
-        # remote_root = os.path.split(rdir)[-1]
         if walker[0] != parent:
-            walker[0].replace(parent, '')
-            walker[0].replace('\\', '/')
+            folder = walker[0].replace(parent, '')
             try:
-                srv.mkdir(os.path.join(rdir, walker[0]))
-            except FileExistsError:
+                joined = f'{rdir}{folder}'
+                srv.mkdir(joined.replace('\\', '/'))
+            except IOError:
                 pass
-        srv.put_d(walker[0], os.path.join(rdir, walker[0]))
+            for file in walker[2]:
+                srv.put('.\\' + parent + os.path.join(folder, file),
+                        str(rdir +
+                            os.path.join(folder, file)).replace('\\', '/'))
+        else:
+            for file in walker[2]:
+                srv.put(os.path.join('.', parent, file).replace('\\', '/'),
+                        os.path.join(rdir, file).replace('\\', '/'))

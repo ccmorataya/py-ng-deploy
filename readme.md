@@ -75,4 +75,4 @@ $ pyngDeploy dev --restore
 - [X] Change rcfile to configuration file (.ini)
 - [X] Add colors to `pyngDeploy` messages
 - [X] Add check for .pyngdeployrc when `pyngDeploy` is lauched and send warning
-- [ ] Improve upload integration from Windows to Linux _(Actually not working)_
+- [X] Improve upload integration from Windows to Linux
