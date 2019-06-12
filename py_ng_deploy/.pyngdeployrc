@@ -1,11 +1,13 @@
 [dev]
 Host = localhost
+Port = 22
 Username = user
 Password = pass
 RemoteDir = /remote/dir/path
 
 [prod]
 Host = localhost
+Port = 22
 Username = user
 Password = pass
 RemoteDir = /remote/dir/path

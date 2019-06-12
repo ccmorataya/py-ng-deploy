@@ -22,6 +22,7 @@ def host_key_check(environment):
         with pysftp.Connection(host=config[environment]['Host'],
                                username=config[environment]['Username'],
                                password=config[environment]['Password'],
+                               port=config[environment]['Port'],
                                cnopts=cnopts) as sftp:
             if hostkeys is not None:
                 print(
@@ -35,6 +36,7 @@ def host_key_check(environment):
     return pysftp.Connection(host=config[environment]['Host'],
                              username=config[environment]['Username'],
                              password=config[environment]['Password'],
+                             port=config[environment]['Port'],
                              cnopts=cnopts)
 
 
