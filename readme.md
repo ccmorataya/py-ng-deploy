@@ -76,3 +76,5 @@ $ pyngDeploy dev --restore
 - [X] Add colors to `pyngDeploy` messages
 - [X] Add check for .pyngdeployrc when `pyngDeploy` is lauched and send warning
 - [X] Improve upload integration from Windows to Linux
+- [ ] Add flag `--skip-build`
+- [ ] Add `Port` key in .pyngdeployrc and read it
