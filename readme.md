@@ -8,7 +8,7 @@
 ## Install
 **_Recomended_**
 ```
-pip install -i https://test.pypi.org/simple/ py-ng-deploy
+pip install py-ng-deploy
 ```
 **_Alternative_**
 * Clone this repo:  
